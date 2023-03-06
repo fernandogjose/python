@@ -20,11 +20,12 @@ class Usuario(db.Model):
     def json(self):
         return {
             'id': self.id,
-            'nome': self.usuario,
+            'nome': self.nome,
             'email': self.email
         }
 
 
+app.app_context().push()
 db.create_all()
 
 
@@ -62,14 +63,9 @@ def usuario_adicionar():
 def usuario_obter_todos():
     try:
         usuarios = Usuario.query.all()
-
-        return make_response(jsonify({
-            'usuarios': [Usuario.json() for usuario in usuarios]
-        }), 200)
+        return make_response(jsonify({'usuarios':[usuario.json() for usuario in usuarios]}), 200)
     except e:
-        return make_response(jsonify({
-            'mensagem': 'erro ao obter todos os usuário'
-        }), 500)
+        return make_response(jsonify({'mensagem': 'erro ao obter todos os usuário'}), 500)
 
 
 # usuario obter por id
@@ -79,7 +75,7 @@ def usuario_obter_por_id(id: int):
         usuario = Usuario.query.filter_by(id=id).first()
         if usuario:
             return make_response(jsonify({
-                'usuario': Usuario.json()
+                'usuario': usuario.json()
             }), 200)
 
         return make_response(jsonify({
@@ -93,10 +89,10 @@ def usuario_obter_por_id(id: int):
 
 # usuario atualizar
 @app.route('/usuarios/<int:id>', methods=['PUT'])
-def usuario_obter_por_id(id: int):
+def usuario_atualizar(id: int):
     try:
         usuario = Usuario.query.filter_by(id=id).first()
-        if(usuario):
+        if (usuario):
             usuario_request = request.get_json()
             usuario.nome = usuario_request['nome']
             usuario.email = usuario_request['email']
@@ -117,11 +113,11 @@ def usuario_obter_por_id(id: int):
 
 
 # usuario deletar
-@app.route('/usuarios/<int:id>', methods=['PUT'])
-def usuario_obter_por_id(id: int):
+@app.route('/usuarios/<int:id>', methods=['DELETE'])
+def usuario_deletar(id: int):
     try:
         usuario = Usuario.query.filter_by(id=id).first()
-        if(usuario):
+        if (usuario):
             db.session.delete(usuario)
             db.session.commit()
 
