@@ -4,10 +4,10 @@ from flask import jsonify
 def init_app(app):
     @app.route("/homepage", methods=['GET'])
     def get():
-        print(app.config.get('TITLE'))
+        print(app.config.get('SQLALCHEMY_DATABASE_URI'))
         return jsonify(
             {
-                "nome": f"Esta é a minha {app.config.get('TITLE')}"
+                "nome": f"AAAEsta é a minha {app.config.get('TITLE')}"
             }
         )
 

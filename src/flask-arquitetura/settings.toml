@@ -1,12 +1,14 @@
 [default]
-DEBUG = false
 TITLE = "Flask API"
 EXTENSIONS = [
     "src.application.controllers.home_controller"
 ]
 
 [development]
-DEBUG = true
+EXTENSIONS = [
+    "src.infra.extensions.database",
+    "src.infra.extensions.database_init"
+]
 SQLALCHEMY_DATABASE_URI = 'sqlite:///development.db'
 
 [testing]
