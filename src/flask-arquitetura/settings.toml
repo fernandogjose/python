@@ -2,7 +2,7 @@
 TITLE = "Flask API"
 DATABASE_INIT = false
 EXTENSIONS = [
-    "src.application.controllers.home_controller",
+    "src.application.controllers.usuario_controller",
     "src.infra.extensions.database",
     "src.infra.extensions.database_init"
 ]
