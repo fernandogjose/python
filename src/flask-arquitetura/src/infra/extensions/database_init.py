@@ -10,10 +10,18 @@ def init_app(app):
         db.drop_all()
         db.create_all()
 
-        db.session.add(Usuario(
-            nome='Fernando', email='fernandogjose@gmail.com', senha='12345', idade=41))
-        db.session.add(Usuario(
-            nome='Priscila', email='priscilaecoaprender@gmail.com', senha='12345', idade=41))
-        db.session.commit()
+        db.session.add(
+            Usuario(nome='Fernando',
+                    email='fernandogjose@gmail.com',
+                    senha='12345',
+                    idade=41)
+        )
 
-        # users = db.session.execute(db.select(Usuario)).scalars()
+        db.session.add(
+            Usuario(nome='Priscila',
+                    email='priscilaecoaprender@gmail.com',
+                    senha='12345',
+                    idade=41)
+        )
+
+        db.session.commit()

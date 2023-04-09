@@ -12,6 +12,7 @@ DATABASE_INIT = true
 SQLALCHEMY_DATABASE_URI = 'sqlite:///development.db'
 
 [testing]
+DATABASE_INIT = true
 SQLALCHEMY_DATABASE_URI = 'sqlite:///testing.db'
 
 [production]
