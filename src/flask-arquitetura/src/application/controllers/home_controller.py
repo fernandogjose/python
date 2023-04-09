@@ -1,14 +1,13 @@
-import os
 from flask import jsonify
 
 
 def init_app(app):
     @app.route("/homepage", methods=['GET'])
     def get():
-        print(os.environ.get('MINHA_VAR'))
+        print(app.config.get('TITLE'))
         return jsonify(
             {
-                "nome": "nome"
+                "nome": f"Esta é a minha {app.config.get('TITLE')}"
             }
         )
 
